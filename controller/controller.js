@@ -1,8 +1,12 @@
 const moviesSchema = require("../modals/schema")
-
+let getrout = async(req,res)=>{
+  let show = await moviesSchema.find()
+  res.send(show)
+}
 let postrout = async(req,res)=>{
     await moviesSchema.create(req.body)
-      res.send('done')
+      res.json('done file created')
+      console.log(req.body);
   }
   let deleterout = async(req ,res)=>{
     let{id} = req.params;
@@ -17,4 +21,4 @@ let updaterout =async(req,res)=>{
   let updeteId =await moviesSchema.find()
   res.send(updeteId)
 }
-  module.exports = {postrout , deleterout ,updaterout}
+  module.exports = {postrout , deleterout ,updaterout , getrout}

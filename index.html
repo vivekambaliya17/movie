@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <style>
+*{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+    td {
+      padding: 10px 30px;
+    }
+  </style>
+  <form style="
+        margin: 300px auto;
+        text-align: center;
+        width: 500px;
+        width: fit-content;
+      " id="form">
+    <table border="1">
+      <tr>
+        <td class="td">title</td>
+        <td><input type="text" id="title" placeholder="title" /></td>
+      </tr>
+      <tr>
+        <td class="td">poster</td>
+        <td><input type="text" id="poster" placeholder="poster" /></td>
+      </tr>
+      <tr>
+        <td class="td">year</td>
+        <td><input type="number" placeholder="year" id="year" /></td>
+      </tr>
+      <tr>
+        <td class="td">rating</td>
+        <td><input type="text" id="rating" placeholder="rating" /></td>
+      </tr>
+      <tr>
+        <td class="td">Director</td>
+        <td><input type="text" id="Director" placeholder="Director" /></td>
+      </tr>
+      <tr>
+        <td class="td">durection</td>
+        <td><input type="text" placeholder="durection" id="durection" /></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input type="submit" />
+        </td>
+      </tr>
+    </table>
+  </form>
+   
+  <script>
+document.getElementById("form").addEventListener("submit",function(event){
+  event.preventDefault()
+      let title = document.getElementById("title").value;
+      let year = document.getElementById("year").value;
+      let rating = document.getElementById("rating").value;
+      let Director = document.getElementById("Director").value;
+      let durection = document.getElementById("durection").value;
+      let poster = document.getElementById("poster").value;
+
+
+      let obj = {
+        "title":title,
+        "year": year,
+        "rating": rating,
+        "durection": durection,
+        "Director": Director,
+        "poster":poster
+      };
+      console.log(obj);
+
+      fetch('http://localhost:8000/post',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json ' },
+        body:JSON.stringify(obj)
+      })
+       .then(response => response.json())
+        
+     .then(data => {console.log(data);})
+ 
+})
+  </script>
+  <!-- <script>
+    document.getElementById("form").addEventListener("submit", buttonclick);
+    function buttonclick(e) {
+      e.preventDefault();
+      let title = document.getElementById("title").value;
+      let year = document.getElementById("year").value;
+      let rating = document.getElementById("rating").value;
+      let Director = document.getElementById("Director").value;
+      let durection = document.getElementById("durection").value;
+      console.log(title);
+
+      let obj = {
+        title: title,
+        year: year,
+        rating: rating,
+        durection: durection,
+        Director: Director,
+      };
+      console.log(obj);
+
+
+
+
+      let get = async () => {
+        let req = await fetch(`http://localhost:8000/`)
+        let res = await req.json();
+        console.log(res)
+      }
+      get()
+      create(obj)
+    }
+
+
+    async function create(data) {
+      try {
+
+        const resp = await fetch('http://localhost:8000/post', {
+          method: 'POST',
+          mode: "cors",
+          changeOrigin: true,
+          headers: {
+            'Content-Type': 'application/json ',
+            'Accept': 'application/json',
+            "Access-Control-Origin": "*"
+          },
+          body: JSON.stringify(data)
+        })
+        console.log(resp)
+
+        console.log(resp.body)
+        resp.headers.forEach(console.log);
+
+        return JSON.stringify(resp);
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+
+
+  </script> -->
+
+</body>
+
+</html>

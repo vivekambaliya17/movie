@@ -6,7 +6,7 @@ let conect = async()=>{
         console.log("running");
         await mongoose.connect(process.env.DB)
         console.log("conect")
-    } catch (error) {
+    } catch (error) {   
         console.log(error)
     }
 }
